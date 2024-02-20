@@ -5,13 +5,7 @@
 //     homeSection.classList.add('hidden');
 //     // console.log(homeSection.classList);
 
-//     // step-2: show the playground......
 
-//     const playGroundSection = document.getElementById('play-ground');
-//     playGroundSection.classList.remove('hidden');
-//     // console.log(playGroundSection.classList);
-
-// }
 
 function handleKeyboardKeyUpEvent(event){
     const playerPressed = event.key;
