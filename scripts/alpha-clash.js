@@ -1,13 +1,11 @@
-// function play() {
-//     // step-1: hide the home screen...
-
-//     const homeSection = document.getElementById('home-screen');
-//     homeSection.classList.add('hidden');
-//     // console.log(homeSection.classList);
 
 
+const audio = new Audio()
+
+let isGamePlayOn = false;
 
 function handleKeyboardKeyUpEvent(event){
+    if (isGamePlayOn == false) return;
     const playerPressed = event.key;
     // console.log('Player Pressed',playerPressed);
 
@@ -25,31 +23,22 @@ function handleKeyboardKeyUpEvent(event){
     // check matched or not
     if(playerPressed === expectedAlphabet){
         console.log('You get a point');
-        // console.log('you have pressed correctly', expectedAlphabet);
+        
+        audio.src = "../audio/success.mp3";
+        audio.play();
 
         const currentScore = getTextElementValueById('current-score');
         // console.log(currentScore);
         const updatedScore = currentScore + 1;
         setTextElementValueById('current-score', updatedScore);
-        //-----------------------------------
-        // update score
-        // 1. get the current score
-        // const currentScoreElement = document.getElementById('current-score');
-        // const currentScoreText = currentScoreElement.innerText;
-        // const currentScore = parseInt(currentScoreText);
-        // console.log(currentScore);
-
-        // // 2. increase the score by 1
-        // const newScore = currentScore + 1;
-        // // 3. show the updated score..
-        // currentScoreElement.innerText = newScore;
-
-        // start a new round
+        
         removeBackgroundColorById(expectedAlphabet);
         continueGame();
     }
     else {
         console.log('you missed. you lost a life');
+        audio.src = "../audio/wrong-answer.mp3";
+        audio.play();
 
         const currentLife = getTextElementValueById('current-life');
         const newLife = currentLife - 1;
@@ -93,6 +82,7 @@ function continueGame(){
 
 function play(){
     // hide everything show only the playground...
+    console.log('play button clicked');
     hideElementById('home-screen');
     hideElementById('final-score');
     addElementById('play-ground');
